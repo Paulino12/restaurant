@@ -10,19 +10,62 @@ import './Navbar.css';
 
 const Navbar = () => {
 
+  const navItems = [
+    {
+      id: 1,
+      title: 'home',
+      url: '#home'
+    },
+    {
+      id: 2,
+      title: 'About',
+      url: '#aboutus'
+    },
+    {
+      id: 3,
+      title: 'Menu',
+      url: '#menu'
+    },
+    {
+      id: 4,
+      title: 'Awards',
+      url: '#awards'
+    },
+    {
+      id: 5,
+      title: 'Contact',
+      url: '#contact'
+    }
+  ]
+
+  const [navTarget, setNavTarget] = useState('')
+
+  const handleNav = (e) => {
+    e.preventDefault()
+    let target = e.target.getAttribute('href')
+    setNavTarget(target)
+    let location = document.querySelector(target).offsetTop
+    window.scrollTo({
+      left: 0,
+      top: location - 55
+    })
+  } 
+
   const [toggleMenu, setToggleMenu] = useState(false)
 
   return (
-    <div className='app__navbar'>
+    <div className='app__navbar' id='navbar'>
       <div className='app__navbar-logo'>
-        <img src={images.gericht} alt="app logo" />
+        <img src={images.saba} alt="app logo" />
       </div>
       <ul className='app__navbar-links'>
-        <li className='p__opensans'><a href='#home'>Home</a></li>
-        <li className='p__opensans'><a href='#about'>About</a></li>
-        <li className='p__opensans'><a href='#menu'>Menu</a></li>
-        <li className='p__opensans'><a href='#awards'>Awards</a></li>
-        <li className='p__opensans'><a href='#contact'>Contact</a></li>
+        {
+          navItems.map((navItem, index) => {
+            return <li onClick={handleNav} className={`p__opensans ${navTarget === navItem.url ? 'app__navbar-active': '' }`} key={navItem.id}>
+                <a href={navItem.url}>{navItem.title}</a>
+                </li>
+            })
+        }
       </ul>
       <div className='app__navbar-login'>
         <a href='#login' className='p__opensans'>Log In/Register</a>
@@ -36,11 +79,13 @@ const Navbar = () => {
             <div className='app__navbar-smallscreen_overlay flex__center slide-bottom'>
               <MdOutlineRestaurantMenu fontSize={27} className="overlay__close" onClick={() => setToggleMenu(false)} />
               <ul className='app__navbar-smallscreen_links'>
-                <li className='p__opensans'><a href='#home'>Home</a></li>
-                <li className='p__opensans'><a href='#about'>About</a></li>
-                <li className='p__opensans'><a href='#menu'>Menu</a></li>
-                <li className='p__opensans'><a href='#awards'>Awards</a></li>
-                <li className='p__opensans'><a href='#contact'>Contact</a></li>
+                {
+                  navItems.map((navItem, index) => {
+                    return <li onClick={handleNav} className={`p__opensans ${navTarget === navItem.url  ? 'app__navbar-active': '' }`} key={navItem.id}>
+                        <a href={navItem.url}>{navItem.title} {navTarget}</a>
+                        </li>
+                    })
+                }
               </ul>
             </div>
           )

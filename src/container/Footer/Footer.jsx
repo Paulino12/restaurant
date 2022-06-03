@@ -1,13 +1,12 @@
 import React from 'react';
 import { FiFacebook, FiTwitter, FiInstagram } from 'react-icons/fi'
 
-import { FooterOverlay, Newsletter } from '../../components'
+import { Newsletter } from '../../components'
 import { images } from '../../constants';
 import './Footer.css';
 
 const Footer = () => (
   <div className='app__footer section__padding'>
-    <FooterOverlay />
     <Newsletter />
 
     <div className='app__footer-links'>
@@ -19,7 +18,7 @@ const Footer = () => (
       </div>
 
       <div className='app__footer-links_logo'>
-        <img src={images.gericht} alt="footer_log" />
+        <img src={images.saba} alt="footer_log" />
         <p className='p__opensans'>
           "The best way to find yourself is to lose yourself in the service of others.”
         </p>
